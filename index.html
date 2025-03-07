@@ -78,31 +78,16 @@
             border-radius: 8px;
             background-color: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            height: 80vh;
-            width: 100%;
-            position: relative;
+            padding: 20px;
+            text-align: center;
+            overflow: auto;
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 800px;
+            height: 800px;
             border: none;
-            display: block;
-        }
-
-        .figure-description {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #ecf0f1;
-            border-radius: 4px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 2rem;
+            max-width: 100%;
         }
     </style>
 </head>
@@ -125,16 +110,7 @@
         <div class="figure-container">
             <iframe id="figureFrame" src="figura1.html" title="Figure Display"></iframe>
         </div>
-
-        <div class="figure-description">
-            <h3 id="figureTitle">Windows Folder Options - General Tab</h3>
-            <p id="figureDescription">This figure shows the General tab of the Windows Folder Options dialog, which allows users to configure how folders are displayed and how items are clicked.</p>
-        </div>
     </main>
-
-    <footer>
-        <p>Created with HTML, CSS and SVG</p>
-    </footer>
 
     <script>
         function changeFrame(src, button, title) {
@@ -146,17 +122,15 @@
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            // Update description
-            document.getElementById('figureTitle').textContent = title;
-
-            // Update description text based on which figure is selected
-            const descriptionElement = document.getElementById('figureDescription');
-            if (src.includes('figura1')) {
-                descriptionElement.textContent = 'This figure shows the General tab of the Windows Folder Options dialog, which allows users to configure how folders are displayed and how items are clicked.';
-            } else if (src.includes('figura2')) {
-                descriptionElement.textContent = 'This figure shows the View tab of the Windows Folder Options dialog, which allows users to configure advanced settings for folder views and file display options.';
-            } else if (src.includes('figura3')) {
-                descriptionElement.textContent = 'This figure shows a UML Use Case Diagram for an E-Course System, illustrating the interactions between actors (Tutor and Creator) and various system functions.';
+            // Adjust iframe height for Figure 3 which may need more vertical space
+            if (src.includes('figura3')) {
+                setTimeout(function() {
+                    const iframe = document.getElementById('figureFrame');
+                    iframe.style.height = '1000px';
+                }, 100);
+            } else {
+                // Reset height for other figures
+                document.getElementById('figureFrame').style.height = '800px';
             }
         }
     </script>
