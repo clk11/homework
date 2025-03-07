@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Folder Options - View</title>
+    <style>
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dialog-box {
+            width: 470px;
+            background-color: #ece9d8;
+            border: 2px solid #0066cc;
+            border-radius: 0;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .title-bar {
+            background: #0066cc;
+            color: white;
+            padding: 4px 8px;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-buttons {
+            display: flex;
+        }
+
+        .help-button, .close-button {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            text-align: center;
+            line-height: 20px;
+            border: 1px solid white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .help-button {
+            background-color: #0066cc;
+        }
+
+        .close-button {
+            background-color: #ff5555;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #ece9d8;
+            border-bottom: 1px solid #a0a0a0;
+            padding: 3px 3px 0 3px;
+        }
+
+        .tab {
+            padding: 3px 12px;
+            border: 1px solid #a0a0a0;
+            border-bottom: none;
+            margin-right: 2px;
+            background-color: #ece9d8;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 0;
+        }
+
+        .tab.active {
+            background-color: #ece9d8;
+            border-bottom: 1px solid #ece9d8;
+            position: relative;
+            top: 1px;
+            font-weight: normal;
+        }
+
+        .content {
+            padding: 10px;
+            background-color: #ece9d8;
+        }
+
+        .section {
+            margin-bottom: 10px;
+            border: 1px solid #a0a0a0;
+            border-radius: 0;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .section-title {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .option {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .icon-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .radio {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid #808080;
+            display: inline-block;
+            position: relative;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .radio.selected {
+            border-color: #0066cc;
+        }
+
+        .radio.selected::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .checkbox {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            border: 1px solid #808080;
+            display: inline-block;
+            position: relative;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .checkbox.checked::after {
+            content: "✓";
+            color: #0066cc;
+            position: absolute;
+            top: -3px;
+            left: 2px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            gap: 8px;
+            background-color: #ece9d8;
+        }
+
+        .button {
+            padding: 4px 15px;
+            background-color: #ece9d8;
+            border: 1px solid #a0a0a0;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .button:hover {
+            background-color: #e5e5e0;
+        }
+
+        .button[disabled] {
+            color: #a0a0a0;
+            cursor: default;
+        }
+
+        .restore-button {
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        .restore-button .button {
+            padding: 3px 12px;
+        }
+
+        .option-text {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .folder-view {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .folder-icon {
+            margin-right: 15px;
+        }
+
+        .folder-text {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .folder-buttons {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .advanced-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .settings-list {
+            border: 1px solid #a0a0a0;
+            height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            margin-bottom: 10px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            font-size: 13px;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .folder-icon-small {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .scrollbar {
+            width: 16px;
+            background-color: #f0f0f0;
+            border-left: 1px solid #a0a0a0;
+        }
+
+        .scrollbar-button {
+            height: 16px;
+            background-color: #ece9d8;
+            border: 1px solid #a0a0a0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scrollbar-track {
+            height: 168px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .scrollbar-thumb {
+            width: 14px;
+            height: 40px;
+            background-color: #ece9d8;
+            border: 1px solid #a0a0a0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-box">
+        <div class="title-bar">
+            <div>Folder Options</div>
+            <div class="title-buttons">
+                <div class="help-button">?</div>
+                <div class="close-button">X</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab">General</div>
+            <div class="tab active">View</div>
+            <div class="tab">File Types</div>
+            <div class="tab">Offline Files</div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Folder views</div>
+                <div class="folder-view">
+                    <div class="folder-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <!-- Folder icon with documents -->
+                            <path d="M4,8 L16,8 L20,12 L36,12 L36,32 L4,32 Z" fill="#f5f5c5" stroke="#aa8800" stroke-width="1" />
+                            <rect x="12" y="16" width="6" height="6" fill="#ff0000" />
+                            <rect x="20" y="16" width="6" height="6" fill="#00ff00" />
+                            <rect x="12" y="24" width="6" height="6" fill="#0000ff" />
+                            <rect x="20" y="24" width="6" height="6" fill="#ffff00" />
+                        </svg>
+                    </div>
+                    <div class="folder-text">
+                        <p>You can apply the view (such as Details or Tiles) that you are using for this folder to all folders.</p>
+                        <div class="folder-buttons">
+                            <button class="button">Apply to All Folders</button>
+                            <button class="button">Reset All Folders</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-title">Advanced settings:</div>
+            <div class="settings-list">
+                <div style="display: flex;">
+                    <div style="flex: 1;">
+                        <div class="folder-item">
+                            <div class="folder-icon-small">
+                                <svg width="16" height="16" viewBox="0 0 16 16">
+                                    <path d="M2,3 L6,3 L8,5 L14,5 L14,13 L2,13 Z" fill="#f5f5c5" stroke="#aa8800" stroke-width="1" />
+                                </svg>
+                            </div>
+                            <span>Files and Folders</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox checked"></div>
+                            <span>Automatically search for network folders and printers</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox checked"></div>
+                            <span>Display file size information in folder tips</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox checked"></div>
+                            <span>Display simple folder view in Explorer's Folders list</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox"></div>
+                            <span>Display the contents of system folders</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox checked"></div>
+                            <span>Display the full path in the address bar</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox checked"></div>
+                            <span>Display the full path in the title bar</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox"></div>
+                            <span>Do not cache thumbnails</span>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon-small">
+                                <svg width="16" height="16" viewBox="0 0 16 16">
+                                    <path d="M2,3 L6,3 L8,5 L14,5 L14,13 L2,13 Z" fill="#f5f5c5" stroke="#aa8800" stroke-width="1" />
+                                </svg>
+                            </div>
+                            <span>Hidden files and folders</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="radio"></div>
+                            <span>Do not show hidden files and folders</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="radio selected"></div>
+                            <span>Show hidden files and folders</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox"></div>
+                            <span>Hide extensions for known file types</span>
+                        </div>
+                        <div class="setting-item">
+                            <div class="checkbox"></div>
+                            <span>Hide protected operating system files (Recommended)</span>
+                        </div>
+                    </div>
+                    <div class="scrollbar">
+                        <div class="scrollbar-button">▲</div>
+                        <div class="scrollbar-track">
+                            <div class="scrollbar-thumb"></div>
+                        </div>
+                        <div class="scrollbar-button">▼</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restore-button">
+                <button class="button">Restore Defaults</button>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="button">OK</button>
+            <button class="button">Cancel</button>
+            <button class="button" disabled style="color: #a0a0a0;">Apply</button>
+        </div>
+    </div>
+</body>
+</html>

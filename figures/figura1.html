@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Folder Options</title>
+    <style>
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dialog-box {
+            width: 470px;
+            background-color: #ece9d8;
+            border: 2px solid #0066cc;
+            border-radius: 0;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .title-bar {
+            background: #0066cc;
+            color: white;
+            padding: 4px 8px;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-buttons {
+            display: flex;
+        }
+
+        .help-button, .close-button {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            text-align: center;
+            line-height: 20px;
+            border: 1px solid white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .help-button {
+            background-color: #0066cc;
+        }
+
+        .close-button {
+            background-color: #ff5555;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #ece9d8;
+            border-bottom: 1px solid #a0a0a0;
+            padding: 3px 3px 0 3px;
+        }
+
+        .tab {
+            padding: 3px 12px;
+            border: 1px solid #a0a0a0;
+            border-bottom: none;
+            margin-right: 2px;
+            background-color: #ece9d8;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 0;
+        }
+
+        .tab.active {
+            background-color: #ece9d8;
+            border-bottom: 1px solid #ece9d8;
+            position: relative;
+            top: 1px;
+            font-weight: normal;
+        }
+
+        .content {
+            padding: 10px;
+            background-color: #ece9d8;
+        }
+
+        .section {
+            margin-bottom: 10px;
+            border: 1px solid #a0a0a0;
+            border-radius: 0;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .section-title {
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .option {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .icon-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #a0a0a0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .radio-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid #808080;
+            display: inline-block;
+            position: relative;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .radio.selected {
+            border-color: #0066cc;
+        }
+
+        .radio.selected::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            gap: 8px;
+            background-color: #ece9d8;
+        }
+
+        .button {
+            padding: 4px 15px;
+            background-color: #ece9d8;
+            border: 1px solid #a0a0a0;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .button:hover {
+            background-color: #e5e5e0;
+        }
+
+        .button[disabled] {
+            color: #a0a0a0;
+            cursor: default;
+        }
+
+        .restore-button {
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        .restore-button .button {
+            padding: 3px 12px;
+        }
+
+        .grayed-text {
+            color: #a0a0a0;
+        }
+
+        .option-text {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .indented {
+            margin-left: 40px;
+        }
+
+        .second-line {
+            margin-left: 230px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-box">
+        <div class="title-bar">
+            <div>Folder Options</div>
+            <div class="title-buttons">
+                <div class="help-button">?</div>
+                <div class="close-button">X</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">General</div>
+            <div class="tab">View</div>
+            <div class="tab">File Types</div>
+            <div class="tab">Offline Files</div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">Tasks</div>
+                <div class="option">
+                    <div class="icon-container">
+                        <div class="icon">
+                            <svg width="30" height="30" viewBox="0 0 30 30">
+                                <!-- Window with blue header and document thumbnails -->
+                                <rect x="0" y="0" width="30" height="30" fill="white" />
+                                <rect x="0" y="0" width="30" height="6" fill="#000080" />
+                                <rect x="2" y="2" width="2" height="2" fill="#ffffff" />
+                                <rect x="5" y="2" width="2" height="2" fill="#ffffff" />
+                                <rect x="8" y="2" width="2" height="2" fill="#ffffff" />
+
+                                <!-- Document thumbnails -->
+                                <rect x="4" y="10" width="8" height="6" fill="#ff6666" />
+                                <rect x="16" y="10" width="8" height="6" fill="#ffcc66" />
+                                <rect x="4" y="18" width="8" height="6" fill="#66cc66" />
+                                <rect x="16" y="18" width="8" height="6" fill="#6699cc" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="option-text">
+                        <div class="radio selected"></div>
+                        <span>Show common tasks in folders</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="icon-container"></div>
+                    <div class="option-text">
+                        <div class="radio"></div>
+                        <span>Use Windows classic folders</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Browse folders</div>
+                <div class="option">
+                    <div class="icon-container">
+                        <div class="icon">
+                            <svg width="30" height="30" viewBox="0 0 30 30">
+                                <!-- Window with green content area -->
+                                <rect x="0" y="0" width="30" height="30" fill="white" />
+                                <rect x="0" y="0" width="30" height="6" fill="#000080" />
+                                <rect x="2" y="2" width="2" height="2" fill="#ffffff" />
+                                <rect x="5" y="2" width="2" height="2" fill="#ffffff" />
+                                <rect x="8" y="2" width="2" height="2" fill="#ffffff" />
+
+                                <!-- Green content area -->
+                                <rect x="2" y="8" width="26" height="20" fill="#99cc99" />
+
+                                <!-- Text lines -->
+                                <rect x="4" y="12" width="22" height="1" fill="#ffffff" />
+                                <rect x="4" y="15" width="22" height="1" fill="#ffffff" />
+                                <rect x="4" y="18" width="22" height="1" fill="#ffffff" />
+                                <rect x="4" y="21" width="15" height="1" fill="#ffffff" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="option-text">
+                        <div class="radio selected"></div>
+                        <span>Open each folder in the same window</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="icon-container"></div>
+                    <div class="option-text">
+                        <div class="radio"></div>
+                        <span>Open each folder in its own window</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Click items as follows</div>
+                <div class="option">
+                    <div class="icon-container">
+                        <div class="icon">
+                            <svg width="30" height="30" viewBox="0 0 30 30">
+                                <!-- Mouse cursor pointer with X -->
+                                <rect x="0" y="0" width="30" height="30" fill="white" />
+                                <!-- Arrow pointer -->
+                                <path d="M8,5 L8,18 L12,14 L16,20 L20,18 L16,12 L20,12 Z" fill="black" />
+
+                                <!-- Red X mark -->
+                                <line x1="20" y1="5" x2="25" y2="10" stroke="red" stroke-width="1.5" />
+                                <line x1="25" y1="5" x2="20" y2="10" stroke="red" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="option-text">
+                        <div class="radio"></div>
+                        <span>Single-click to open an item (point to select)</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="icon-container"></div>
+                    <div class="option-text indented">
+                        <div class="radio"></div>
+                        <span class="grayed-text">Underline icon titles consistent with my browser</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="icon-container"></div>
+                    <div class="option-text indented">
+                        <div class="radio"></div>
+                        <span class="grayed-text">Underline icon titles only when I point at them</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="icon-container"></div>
+                    <div class="option-text">
+                        <div class="radio selected"></div>
+                        <span>Double-click to open an item (single-click to select)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restore-button">
+                <button class="button">Restore Defaults</button>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="button">OK</button>
+            <button class="button">Cancel</button>
+            <button class="button" disabled style="color: #a0a0a0;">Apply</button>
+        </div>
+    </div>
+</body>
+</html>

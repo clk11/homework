@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UML Use Case Diagram - E-Course System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .diagram-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 95%;
+            max-height: 95%;
+            overflow: auto;
+        }
+
+        svg {
+            background-color: #d3d3d3;
+        }
+
+        text {
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            text-anchor: middle;
+        }
+
+        .actor-text {
+            text-anchor: middle;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .title-text {
+            font-size: 14px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+
+        .relationship-text {
+            font-size: 10px;
+            font-style: italic;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-container">
+        <svg width="1000" height="1100" viewBox="0 0 1000 1100">
+            <rect x="0" y="0" width="1000" height="1100" fill="#d3d3d3" />
+
+            <rect x="250" y="50" width="700" height="1000" fill="#d3d3d3" stroke="#000" stroke-width="1" />
+
+            <text x="600" y="80" class="title-text">Creation and Saving E-Contents</text>
+
+            <circle cx="120" cy="350" r="20" fill="white" stroke="black" stroke-width="1" />
+            <line x1="120" y1="370" x2="120" y2="420" stroke="black" stroke-width="1" />
+            <line x1="90" y1="390" x2="150" y2="390" stroke="black" stroke-width="1" />
+            <line x1="120" y1="420" x2="90" y2="470" stroke="black" stroke-width="1" />
+            <line x1="120" y1="420" x2="150" y2="470" stroke="black" stroke-width="1" />
+            <text x="120" y="500" class="actor-text">Tutor of E-Course</text>
+
+            <circle cx="120" cy="850" r="20" fill="white" stroke="black" stroke-width="1" />
+            <line x1="120" y1="870" x2="120" y2="920" stroke="black" stroke-width="1" />
+            <line x1="90" y1="890" x2="150" y2="890" stroke="black" stroke-width="1" />
+            <line x1="120" y1="920" x2="90" y2="970" stroke="black" stroke-width="1" />
+            <line x1="120" y1="920" x2="150" y2="970" stroke="black" stroke-width="1" />
+            <text x="120" y="1000" class="actor-text">Creator of E-Content</text>
+
+            <ellipse cx="400" cy="150" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="400" y="155">Delete E-Course</text>
+
+            <ellipse cx="650" cy="150" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="650" y="155">Find E-Course</text>
+
+            <ellipse cx="400" cy="250" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="400" y="255">Finish Control</text>
+
+            <ellipse cx="750" cy="250" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="750" y="245">Accessibility of</text>
+            <text x="750" y="265">E-Course</text>
+
+            <ellipse cx="750" cy="400" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="750" y="405">Create E-Course</text>
+
+            <ellipse cx="550" cy="450" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="550" y="445">Delete Learning</text>
+            <text x="550" y="465">Object</text>
+
+            <ellipse cx="750" cy="550" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="750" y="545">Save Learning</text>
+            <text x="750" y="565">Object</text>
+
+            <ellipse cx="400" cy="550" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="400" y="555">Edit E-Course</text>
+
+            <ellipse cx="600" cy="600" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="600" y="605">Find Learning Object</text>
+
+            <ellipse cx="700" cy="700" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="700" y="695">Create Learning</text>
+            <text x="700" y="715">Object</text>
+
+            <ellipse cx="350" cy="750" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="350" y="745">Find Item of Learning</text>
+            <text x="350" y="765">Object</text>
+
+            <ellipse cx="550" cy="750" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="550" y="755">Edit Learning Object</text>
+
+            <ellipse cx="350" cy="850" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="350" y="845">Delete Item of</text>
+            <text x="350" y="865">Learning Object</text>
+
+            <ellipse cx="650" cy="950" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="650" y="945">Create Item Of</text>
+            <text x="650" y="965">Learning Object</text>
+
+            <ellipse cx="850" cy="950" rx="70" ry="40" fill="white" stroke="black" stroke-width="1" />
+            <text x="850" y="945">Save Item of</text>
+            <text x="850" y="965">Learning Object</text>
+
+            <line x1="120" y1="390" x2="330" y2="150" stroke="black" stroke-width="1" />
+            <line x1="120" y1="390" x2="330" y2="250" stroke="black" stroke-width="1" />
+            <line x1="120" y1="390" x2="680" y2="250" stroke="black" stroke-width="1" />
+            <line x1="120" y1="390" x2="680" y2="400" stroke="black" stroke-width="1" />
+            <line x1="120" y1="390" x2="480" y2="450" stroke="black" stroke-width="1" />
+            <line x1="120" y1="390" x2="330" y2="550" stroke="black" stroke-width="1" />
+
+            <line x1="120" y1="890" x2="280" y2="850" stroke="black" stroke-width="1" />
+            <line x1="120" y1="890" x2="580" y2="950" stroke="black" stroke-width="1" />
+
+            <line x1="470" y1="150" x2="580" y2="150" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="525" y="140" class="relationship-text">«include»</text>
+
+            <line x1="470" y1="250" x2="680" y2="250" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="575" y="240" class="relationship-text">«include»</text>
+
+            <line x1="750" y1="290" x2="750" y2="360" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="770" y="325" class="relationship-text">«include»</text>
+
+            <line x1="550" y1="490" x2="600" y2="560" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="560" y="530" class="relationship-text">«include»</text>
+
+            <line x1="700" y1="740" x2="650" y2="910" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="660" y="825" class="relationship-text">«include»</text>
+
+            <line x1="720" y1="950" x2="780" y2="950" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="750" y="940" class="relationship-text">«include»</text>
+
+            <line x1="350" y1="790" x2="350" y2="810" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="370" y="800" class="relationship-text">«include»</text>
+
+            <line x1="700" y1="660" x2="750" y2="590" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="740" y="620" class="relationship-text">«include»</text>
+
+            <line x1="750" y1="440" x2="750" y2="510" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="770" y="475" class="relationship-text">«include»</text>
+
+            <line x1="600" y1="560" x2="470" y2="550" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="535" y="540" class="relationship-text">«extend»</text>
+
+            <line x1="550" y1="710" x2="400" y2="590" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="460" y="650" class="relationship-text">«extend»</text>
+
+            <line x1="350" y1="710" x2="480" y2="750" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="415" y="720" class="relationship-text">«extend»</text>
+
+            <line x1="700" y1="660" x2="620" y2="750" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="650" y="700" class="relationship-text">«extend»</text>
+
+            <line x1="550" y1="790" x2="650" y2="910" stroke="black" stroke-width="1" stroke-dasharray="5,5" />
+            <text x="580" y="850" class="relationship-text">«extend»</text>
+        </svg>
+    </div>
+</body>
+</html>
